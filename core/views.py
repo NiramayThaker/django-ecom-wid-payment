@@ -15,3 +15,24 @@ def about_us(request):
 
 def sign_in(request):
     return render(request, 'sign-in.html')
+
+
+def sign_up(request):
+    pass
+
+
+def blog(request):
+    pass
+
+
+def orders(request):
+    pass
+
+
+def my_profile(request):
+    pass
+
+
+def cart(request):
+    pass
+
