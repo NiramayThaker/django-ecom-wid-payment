@@ -13,14 +13,6 @@ def about_us(request):
     return render(request, 'about_us.html')
 
 
-def sign_in(request):
-    return render(request, 'sign-in.html')
-
-
-def sign_up(request):
-    pass
-
-
 def blog(request):
     pass
 
