@@ -37,7 +37,7 @@
   <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <h1 class="logo"><a href="index.html">Shop Cart</a></h1>
+      <h1 class="logo"><a href="{% url "home" %}">Shop Cart</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="static/assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -67,10 +67,7 @@
   <!-- ======= Hero Section ======= -->
   <section id="hero">
     <div class="hero-container">
-      <h3>Welcome to <strong>Tempo</strong></h3>
-      <h1>We're Creative Agency</h1>
-      <h2>We are team of talented designers making websites with Bootstrap</h2>
-      <a href="" class="btn-get-started scrollto">Shop Now</a>
+      {% block main %}{% endblock main %}
     </div>
   </section><!-- End Hero -->
 

@@ -21,4 +21,3 @@ urlpatterns = [
     path('auth/', include('user_auth.urls')),
     path('', include('core.urls')),
 ]
-
