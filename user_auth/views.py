@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 
 # Create your views here.
 def sign_in(request):
-    return render(request, 'auth/sign_in.html')
+    return render(request, 'about_us.html')
+    
 
 
 def sign_up(request):
@@ -10,4 +11,4 @@ def sign_up(request):
 
 
 def log_out(request):
-    return render(request, 'auth/log_out.html')
+    return HttpResponse("Log out")
