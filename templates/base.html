@@ -11,23 +11,24 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  {% comment %} <link href="static/assets/img/favicon.png" rel="icon"> {% endcomment %}
-  <link href= "static/assets/img/favicon.png" rel="icon">
-  <link href= "static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href= "{% static "/assets/img/favicon.png" %}" rel="icon">  
+  <link href= "{% static "/assets/img/apple-touch-icon.png" %}" rel="apple-touch-icon">
 
+  <link href="{% static "assets/img/apple-touch-icon.png" %}"  rel="apple-touch-icon">
+  
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="static/assets/vendor/bootstrap/css/bootstrap.min.css"  rel="stylesheet">
-  <link href="static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="static/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="{% static "/assets/vendor/bootstrap-icons/bootstrap-icons.css" %}" rel="stylesheet">
+  <link href="{% static "/assets/vendor/bootstrap/css/bootstrap.min.css" %}"  rel="stylesheet">
+  <link href="{% static "/assets/vendor/boxicons/css/boxicons.min.css" %}" rel="stylesheet">
+  <link href="{% static "/assets/vendor/glightbox/css/glightbox.min.css" %}" rel="stylesheet">
+  <link href="{% static "/assets/vendor/remixicon/remixicon.css" %}" rel="stylesheet">
+  <link href="{% static "/assets/vendor/swiper/swiper-bundle.min.css" %}" rel="stylesheet">
  
 
-  <link href="static/assets/css/style.css" rel="stylesheet">
+  <link href="{% static "/assets/css/style.css" %}" rel="stylesheet">
 
 </head>
 
@@ -39,7 +40,7 @@
 
       <h1 class="logo"><a href="{% url "home" %}">Shop Cart</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo"><img src="static/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      <!-- <a href="index.html" class="logo"><img src="{% static "/assets/img/logo.png" %}" alt="" class="img-fluid"></a>-->
 
       <nav id="navbar" class="navbar">
         <ul>
@@ -48,11 +49,18 @@
           <li><a class="nav-link scrollto" href="{% url "about-us" %}">About</a></li>
           <li><a class="nav-link scrollto" href="{% url "orders" %}">Order</a></li>
           <li><a class="nav-link scrollto" href="{% url "my-profile" %}">My Profile</a></li>
-          <li class="dropdown"><a href="#"><span>Sign In</span> <i class="bi bi-chevron-down"></i></a>
+          {% if request.user.is_authenticated %}
+          <li class="dropdown"><a href="#"><span>{{request.user}}</span> <i class="bi bi-chevron-down"></i></a>
+          {% else %}
+            <li class="dropdown"><a href="#"><span>Get Registered</span> <i class="bi bi-chevron-down"></i></a>
+          {% endif %}
             <ul>
-              <li><a href="{% url "sign-in" %}">Sign In</a></li>
-              <li><a href="{% url "sign-up" %}">Sign Up</a></li>
-              <li><a href="{% url "log-out" %}">Log Out</a></li>
+              {% if request.user.is_authenticated %}
+                <li><a href="{% url "log-out" %}">Log Out</a></li>
+              {% else %}
+                <li><a href="{% url "sign-in" %}">Sign In</a></li>
+                <li><a href="{% url "sign-up" %}">Sign Up</a></li>
+              {% endif %}
             </ul>
           </li>
           <li><a class="nav-link scrollto bg-success p-2" href="{% url "contact-us" %}">Contact</a></li>
@@ -156,14 +164,14 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="static/assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="static/assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="static/assets/vendor/php-email-form/validate.js"></script>
+  <script src="{% static "/assets/vendor/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+  <script src="{% static "/assets/vendor/glightbox/js/glightbox.min.js" %}"></script>
+  <script src="{% static "/assets/vendor/isotope-layout/isotope.pkgd.min.js" %}"></script>
+  <script src="{% static "/assets/vendor/swiper/swiper-bundle.min.js" %}"></script>
+  <script src="{% static "/assets/vendor/php-email-form/validate.js" %}"></script>
 
   <!-- Template Main JS File -->
-  <script src="static/assets/js/main.js"></script>
+  <script src="{% static "/assets/js/main.js" %}"></script>
 
 </body>
 

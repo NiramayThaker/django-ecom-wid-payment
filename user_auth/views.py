@@ -1,11 +1,15 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth import logout
 
 # Create your views here.
 def sign_in(request):
 
 
-    return render(request, 'log_in.html')
+
+    context = {"load_form": "log-in", "title": "Log In"}
+    return render(request, 'reg_forms.html', context=context)
 
 
 def sign_up(request):
@@ -16,17 +20,24 @@ def sign_up(request):
 
         if password == conf_password:
             if User.objects.filter(email=email).exists():
-                return HttpResponse("This email is already been used")
+                messages.warning(request, "This email is already been used")
+                return redirect('sign-up')
+                # return HttpResponse("This email is already been used")
             else:
                 user = User(username=email, email=email, password=password)
                 user.save()
-                # return redirect('sign-in')
-                return HttpResponse("user created")
+                messages.success(request, "User Created Successfully")
+                return redirect('sign-up')
+                # return HttpResponse("user created")
         else:
-            return HttpResponse("Password doesn't match")            
+            messages.warning(request, "Password doesn't match")
+            return redirect('sign-up')
+            # return HttpResponse("Password doesn't match")      
     else:
-        return render(request, 'sign_up.html')
+        context = {"load_form": "sign-up", "title": "Sign Up"}
+        return render(request, 'reg_forms.html', context=context)
 
 
 def log_out(request):
-    return HttpResponse("Log out")
+    logout(request)
+    return redirect("home")
