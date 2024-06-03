@@ -118,6 +118,15 @@ USE_I18N = True
 USE_TZ = True
 
 
+# Email Creds
+EMAIL_HOST = 'smtpout.secureserver.net'
+EMAIL_HOST_USER = 'email'
+EMAIL_HOST_PASSWORD = 'password'
+EMAIL_POST = 587
+EMAIL_USER_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 

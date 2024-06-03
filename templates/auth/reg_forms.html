@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}{{title}}{% endblock title %}
+
+{% block main %}
+    {% for msg in messages %}
+
+        <div class="alert alert-primary" role="alert">
+            {{msg}}
+        </div> 
+
+    {% endfor %}
+
+
+    {% if load_form == "log-in" %}
+        
+        <div class="form-container">
+            <form action="{% url "sign-in" %}" method="post">
+                {% csrf_token %}
+                <h3 style="color: black;">Log In</h3>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="form-btn">Login</button>
+            </form>
+            <p>Not Registered ? <a href="{% url "sign-up" %}">SignUp</p>
+        </div>
+
+
+    {% elif load_form == "sign-up" %}
+
+        {% comment %} {% for msg in messages %}
+
+        <div class="alert alert-primary" role="alert">
+            {{msg}}
+        </div>
+
+        {% endfor %} {% endcomment %}
+
+        <div class="form-container">
+
+        <form action="{% url "sign-up" %}" method="POST">
+            {% csrf_token %}
+            <h3 style="color: black;">SignUp</h3>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="conf-password">Confirm Password</label>
+                <input type="password" id="conf-password" name="conf-password" required>
+            </div>
+            <button type="submit" class="form-btn">SignUp</button>
+        </form>
+
+        <p>Already a user ? <a href="{% url "sign-in" %}">LogIn</p>
+
+        </div>
+
+    {% endif %}
+{% endblock main %}
+
+
+{% block content %}
+
+{% endblock content %}
