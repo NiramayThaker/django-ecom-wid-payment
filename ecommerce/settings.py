@@ -120,11 +120,18 @@ USE_TZ = True
 
 # Email Creds
 EMAIL_HOST = 'smtpout.secureserver.net'
-EMAIL_HOST_USER = 'email'
-EMAIL_HOST_PASSWORD = 'password'
+EMAIL_HOST_USER = 'thakerniramay@gmail.com'
+EMAIL_HOST_PASSWORD = 'th@kerNir@m@Y#3#3*'
 EMAIL_POST = 587
 EMAIL_USER_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# EMAIL_HOST = 'smtpout.secureserver.net'
+# EMAIL_HOST_USER = 'email'
+# EMAIL_HOST_PASSWORD = 'password'
+# EMAIL_POST = 587
+# EMAIL_USER_TLS = True
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 
 # Static files (CSS, JavaScript, Images)
