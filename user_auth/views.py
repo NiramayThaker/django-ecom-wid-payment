@@ -17,6 +17,7 @@ def sign_in(request):
     return render(request, 'auth/reg_forms.html', context=context)
 
 
+
 def sign_up(request):
     if request.method == 'POST':
         email = request.POST['email']
