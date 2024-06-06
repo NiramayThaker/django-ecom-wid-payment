@@ -121,9 +121,9 @@ USE_TZ = True
 # Email Creds
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtpout.secureserver.net'
-EMAIL_FROM = 'thakerniramay@gmail.com'
-EMAIL_HOST_USER = 'thakerniramay@gmail.com'
-EMAIL_HOST_PASSWORD = 'dacfjjnqumeqtsga'
+EMAIL_FROM = ''
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 EMAIL_POST = 587
 EMAIL_USER_TLS = True
 # EMAIL_POST = 465
