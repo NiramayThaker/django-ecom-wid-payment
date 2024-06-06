@@ -20,8 +20,9 @@ def sign_in(request):
 
 		print(f"\n\n\n\n\n\n\n {email} - {passwd} \n\n\n\n\n\n\n")
 
-		my_user = User.objects.get(username=email, password=passwd)
-		# my_user = authenticate(username=email, password=passwd)
+		# my_user = User.objects.get(username=email, password=passwd)
+		my_user = authenticate(username=email, password=passwd)
+		print(f"\n\n\n\n\n\n\n {my_user} \n\n\n\n\n\n\n")
 
 		if my_user is not None:
 			login(request, my_user)
@@ -45,18 +46,19 @@ def sign_up(request):
 				return redirect('sign-up')
 			else:
 				user = User(username=email, email=email, password=password)
-				user.is_active = False
-				email_subject = "Activate Your Account"
-				message = render_to_string('auth/activate.html', {
-					'user': user.username,
-					'domain': get_current_site(request).domain,
-					'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-					'token': generate_token.make_token(user),
-					'protocol': 'https' if request.is_secure() else 'http'
-				})
-
-				messages.success(request, f"{message}")
 				user.save()
+
+				# user.is_active = False
+				# email_subject = "Activate Your Account"
+				# message = render_to_string('auth/activate.html', {
+				# 	'user': user.username,
+				# 	'domain': get_current_site(request).domain,
+				# 	'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+				# 	'token': generate_token.make_token(user),
+				# 	'protocol': 'https' if request.is_secure() else 'http'
+				# })
+				#
+				# messages.success(request, f"{message}")
 
 				# email = EmailMessage(
 				# 	email_subject,
@@ -70,6 +72,7 @@ def sign_up(request):
 				# 	messages.error(request, "Some error occured")
 				#
 				# messages.success(request, f"Click to activation link sent on {email}")
+
 				return redirect('sign-up')
 		else:
 			messages.warning(request, "Password doesn't match")
