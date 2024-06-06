@@ -49,11 +49,11 @@
           <li><a class="nav-link scrollto" href="{% url "about-us" %}">About</a></li>
           <li><a class="nav-link scrollto" href="{% url "orders" %}">Order</a></li>
           <li><a class="nav-link scrollto" href="{% url "my-profile" %}">My Profile</a></li>
-<!--          {% if request.user.is_authenticated %}-->
+          {% if request.user.is_authenticated %}
           <li class="dropdown"><a href="#"><span>{{request.user}}</span> <i class="bi bi-chevron-down"></i></a>
-<!--          {% else %}-->
-<!--            <li class="dropdown"><a href="#"><span>Get Registered</span> <i class="bi bi-chevron-down"></i></a>-->
-<!--          {% endif %}-->
+          {% else %}
+            <li class="dropdown"><a href="#"><span>Get Registered</span> <i class="bi bi-chevron-down"></i></a>
+          {% endif %}
             <ul>
               {% if request.user.is_authenticated %}
                 <li><a href="{% url "log-out" %}">Log Out</a></li>
