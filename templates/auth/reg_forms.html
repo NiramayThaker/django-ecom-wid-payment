@@ -48,6 +48,17 @@
             {% csrf_token %}
             <h3 style="color: black;">SignUp</h3>
             <div class="form-group">
+                {{form}}
+            </div>
+            <button type="submit" class="form-btn">SignUp</button>
+        </form>
+
+        {% comment %} <div class="form-container">
+
+        <form action="{% url "sign-up" %}" method="POST">
+            {% csrf_token %}
+            <h3 style="color: black;">SignUp</h3>
+            <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required>
             </div>
@@ -60,7 +71,7 @@
                 <input type="password" id="conf-password" name="conf-password" required>
             </div>
             <button type="submit" class="form-btn">SignUp</button>
-        </form>
+        </form> {% endcomment %}
 
         <p>Already a user ? <a href="{% url "sign-in" %}">LogIn</p>
 

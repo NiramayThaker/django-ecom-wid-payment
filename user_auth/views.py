@@ -10,6 +10,7 @@ from django.utils.encoding import force_bytes, force_str, DjangoUnicodeDecodeErr
 from django.core.mail import EmailMessage
 from django.conf import settings
 from django.views.generic import View
+from .forms import RegistrationForm
 
 
 # Create your views here.
@@ -35,51 +36,15 @@ def sign_in(request):
 
 
 def sign_up(request):
+	form = RegistrationForm()
 	if request.method == 'POST':
-		email = request.POST['email']
-		password = request.POST['password']
-		conf_password = request.POST['conf-password']
+		form = RegistrationForm(request.POST)
+		if form.is_valid():
+			form.save()
+			return redirect('home')
 
-		if password == conf_password:
-			if User.objects.filter(email=email).exists():
-				messages.warning(request, "This email is already been used")
-				return redirect('sign-up')
-			else:
-				user = User(username=email, email=email, password=password)
-				user.save()
-
-				# user.is_active = False
-				# email_subject = "Activate Your Account"
-				# message = render_to_string('auth/activate.html', {
-				# 	'user': user.username,
-				# 	'domain': get_current_site(request).domain,
-				# 	'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-				# 	'token': generate_token.make_token(user),
-				# 	'protocol': 'https' if request.is_secure() else 'http'
-				# })
-				#
-				# messages.success(request, f"{message}")
-
-				# email = EmailMessage(
-				# 	email_subject,
-				# 	message,
-				# 	settings.EMAIL_HOST_USER,
-				# 	[email],
-				# )
-				# if email.send():
-				# 	messages.success(request, "Go check you email")
-				# else:
-				# 	messages.error(request, "Some error occured")
-				#
-				# messages.success(request, f"Click to activation link sent on {email}")
-
-				return redirect('sign-up')
-		else:
-			messages.warning(request, "Password doesn't match")
-			return redirect('sign-up')
-	else:
-		context = {"load_form": "sign-up", "title": "Sign Up"}
-		return render(request, 'auth/reg_forms.html', context=context)
+	context = {"load_form": "sign-up", "title": "Sign Up", 'form': form}
+	return render(request, 'auth/reg_forms.html', context=context)
 
 
 def log_out(request):
