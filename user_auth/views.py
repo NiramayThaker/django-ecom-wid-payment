@@ -18,12 +18,7 @@ def sign_in(request):
 	if request.method == "POST":
 		email = request.POST['email']
 		passwd = request.POST['password']
-
-		print(f"\n\n\n\n\n\n\n {email} - {passwd} \n\n\n\n\n\n\n")
-
-		# my_user = User.objects.get(username=email, password=passwd)
 		my_user = authenticate(username=email, password=passwd)
-		print(f"\n\n\n\n\n\n\n {my_user} \n\n\n\n\n\n\n")
 
 		if my_user is not None:
 			login(request, my_user)
