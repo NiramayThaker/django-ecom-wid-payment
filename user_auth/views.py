@@ -36,7 +36,7 @@ def sign_up(request):
 		form = RegistrationForm(request.POST)
 		if form.is_valid():
 			form.save()
-			return redirect('home')
+			return redirect('sign-in')
 
 	context = {"load_form": "sign-up", "title": "Sign Up", 'form': form}
 	return render(request, 'auth/reg_forms.html', context=context)
