@@ -1,9 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from django.core.exceptions import ValidationError
-from django.forms.fields import EmailField
-from django.forms.forms import Form
+from .models import ContactUs
 
 
 class RegistrationForm(UserCreationForm):
@@ -31,3 +29,9 @@ class RegistrationForm(UserCreationForm):
 		if commit:
 			user.save()
 		return user
+
+
+class ContactUsForm(forms.ModelForm):
+	class Meta:
+		model = ContactUs
+		fields = '__all__'

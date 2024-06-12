@@ -10,7 +10,7 @@ from django.utils.encoding import force_bytes, force_str, DjangoUnicodeDecodeErr
 from django.core.mail import EmailMessage
 from django.conf import settings
 from django.views.generic import View
-from .forms import RegistrationForm
+from .forms import RegistrationForm, ContactUsForm
 
 
 # Create your views here.
@@ -45,6 +45,19 @@ def sign_up(request):
 def log_out(request):
 	logout(request)
 	return redirect("home")
+
+
+def contact_us(request):
+	form = ContactUsForm()
+	if request.method == 'POST':
+		form = ContactUsForm(request.POST)
+		if form.is_valid():
+			form.save()
+			messages.info(request, "Message sent successfully")
+			return redirect('contact-us')
+
+	context = {"load_form": "contact-us", "title": "Contact Us", 'form': form}
+	return render(request, 'auth/reg_forms.html', context=context)
 
 
 class ActivateAccountView(View):
