@@ -35,17 +35,19 @@
   
           <div class="row portfolio-container">
   
-            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-              <img src="static/assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>App 1</h4>
-                <p>App</p>
-                <a href="static/assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 1"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
+            {% for product in products %}
+              <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                <img src="static/assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>{{product.name}}</h4>
+                  <p>{{product.category}}</p>
+                  <a href="static/assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 1"><i class="bx bx-plus"></i></a>
+                  <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                  </div>
+                </div>
+            {% endfor %}
   
-            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+            {% comment %} <div class="col-lg-4 col-md-6 portfolio-item filter-web">
               <img src="static/assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>Web 3</h4>
@@ -124,7 +126,7 @@
                 <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
               </div>
             </div>
-  
+   {% endcomment %}
           </div>
   
         </div>
