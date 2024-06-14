@@ -5,7 +5,6 @@ from .models import Product
 def home(request):
     all_products = Product.objects.all()
     context = {'products': all_products}
-    print(f"\n\n\n\n\n{all_products}\n\n\n\n")
     return render(request, 'index.html', context=context)
 
 
