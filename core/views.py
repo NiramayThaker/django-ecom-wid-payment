@@ -1,29 +1,36 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from .models import Product
+
 
 # Create your views here.
 def home(request):
-    all_products = Product.objects.all()
-    context = {'products': all_products}
-    return render(request, 'index.html', context=context)
+	all_products = Product.objects.all()
+	context = {'products': all_products}
+	return render(request, 'index.html', context=context)
+
+
+def add_item(request):
+	x = request.GET['id']
+	y = request.user.username
+
+	return HttpResponse(y)
 
 
 def about_us(request):
-    return render(request, 'log_in.html')
+	return render(request, 'log_in.html')
 
 
 def blog(request):
-    pass
+	pass
 
 
 def orders(request):
-    pass
+	pass
 
 
 def my_profile(request):
-    pass
+	pass
 
 
 def cart(request):
-    pass
-
+	pass
