@@ -11,16 +11,13 @@ class Product(models.Model):
 	price = models.IntegerField()
 	desc = models.CharField(max_length=100)
 	image = models.ImageField(upload_to='images/images')
-
 	def __str__(self):
 		return f"{self.name} at ₹{self.price}"
 
 
-# class Order(models.Model):
-# 	user = models.ForeignKey(User, on_delete=models.CASCADE)
-# 	p_id = models.IntegerField()
-
-
-class UserOrders(models.Model):
-	p_id = models.IntegerField()
+class TrackOrders(models.Model):
+	product_id = models.IntegerField()
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+	def __str__(self):
+		return f"{self.product_id} at ₹{self.user}"
