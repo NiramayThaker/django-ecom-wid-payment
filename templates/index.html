@@ -2,81 +2,49 @@
 
 {% block title %}Home{% endblock title %}
 
-
 {% block main %}
-
 <h1>Welcome To Our Store</h1>
-
 {% endblock main %}
 
 
 {% block content %}
 
-    <!-- ======= Portfolio Section ======= -->
-    <section id="portfolio" class="portfolio">
-        <div class="container">
-  
-          <div class="section-title">
+<!-- ======= Portfolio Section ======= -->
+<section id="portfolio" class="portfolio">
+    <div class="container">
+
+        <div class="section-title">
             <h2>Products</h2>
             <h3>Check our <span>Products</span></h3>
-          </div>
-  
-          {% comment %} <div class="row">
-            <div class="col-lg-12 d-flex justify-content-center">
-              <ul id="portfolio-flters">
-                <li data-filter="*" class="filter-active">All</li>
-                <li data-filter=".filter-app">App</li>
-                <li data-filter=".filter-card">Card</li>
-                <li data-filter=".filter-web">Web</li>
-              </ul>
-            </div>
-          </div> {% endcomment %}
-  
-          <div class="row portfolio-container">
+        </div>
+
+        <div class="row portfolio-container">
             {% for product in products %}
+            <div class="col-lg-4 col-md-6 portfolio-item filter-app" height=300px>
 
-              {% comment %} <div class="col-md-3 mt-3">
-                <img src="media/{{product.image}}" alt="image not found" class="card-img-top">
-                <div class="card-body">
-                  <h5 class="card-title" id="namepr{{product.id}}">{{product.name}}</h5>
-                  <p class="card-text">{{product.desc | slice:"0:53"}} ... </p>
-                  <h6 class="card-title">
-                    Price:<span id="pricepr{{product.id}}">{{product.price}}</span>
-                  </h6>
-                  <span id="divpr{{product.id}}" class="divpr">
-                    <button id="pr{{product.id}}" class="btn btn-success cart btn-sm mt-0">
-                      Add To cart
-                    </button>
-                  </span>
-                  <a href="media/{{product.image}}" class="href">
-                    <button class="btn btn-dark btn-sm cart">View</button>
-                  </a>
-                </div>
-              </div> {% endcomment %}
-
-              <div class="col-lg-4 col-md-6 portfolio-item filter-app" height=300px>
                 <img src="media/{{product.image}}" class="img-fluid" alt="">
+
                 <div class="portfolio-info">
-                  <a href="#" id={{product.id}}><p style="color:white">{{product.name}}</p></a>
-                  <p>{{product.category}}</p>
-                  
-                  {% comment %} <a href="static/assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 1"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a> {% endcomment %}
-                  
-                  <span id="divpr{{product.id}}" class="divpr">
+                    <a href="#" id={{product.id}}><p style="color:white">{{product.name}}</p></a>
+
+                    <p>{{product.category}}</p>
+
+                    <span id="divpr{{product.id}}" class="divpr">
                     <a href="add-item?id={{product.id}}" id="pr{{product.id}}" class="btn btn-success cart btn-sm mt-0">
                       Add To cart
                     </a>
                   </span>
-                  <a href="media/{{product.image}}">
-                    <button class="btn btn-dark btn-sm cart">View</button>
-                  </a>
-                  </div>
-                </div> 
+
+                    <a href="media/{{product.image}}">
+                        <button class="btn btn-dark btn-sm cart">View</button>
+                    </a>
+                </div>
+            </div>
+
             {% endfor %}
-          </div>
-  
         </div>
-      </section><!-- End Portfolio Section -->
+
+    </div>
+</section><!-- End Portfolio Section -->
 
 {% endblock content %}

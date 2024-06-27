@@ -5,10 +5,16 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 
 
-# Create your views here.
+@login_required
 def home(request):
 	all_products = Product.objects.all()
-	context = {'products': all_products}
+	cart_items = TrackOrders.objects.filter(user=request.user)
+	cart_dict = {item.product_id: item.quantity for item in cart_items}
+
+	context = {
+		'products': all_products,
+		'cart': cart_dict
+	}
 	return render(request, 'index.html', context=context)
 
 
@@ -43,20 +49,28 @@ def about_us(request):
 	return render(request, 'log_in.html')
 
 
+@login_required
 def view_cart(request):
 	# Fetch TrackOrders for the current user
 	items = TrackOrders.objects.filter(user=request.user)
 
 	# Fetch all Product details for the product_ids in items
 	product_ids = items.values_list('product_id', flat=True)
-	product_details = Product.objects.filter(id__in=product_ids)
+	products = Product.objects.filter(id__in=product_ids)
 
-	# Print product details for debugging
+	# Create a dictionary to hold product details and quantities
+	product_details = []
 	total = 0
-	for product in product_details:
-		total += product.price
-		print(f"\n\n{product.price}\n\n")
 
+	for item in items:
+		product = products.get(id=item.product_id)
+		total += product.price * item.quantity
+		product_details.append({
+			'product': product,
+			'quantity': item.quantity,
+		})
+
+	# Print the total for debugging
 	print(total)
 
 	# Prepare the context for the template
@@ -66,15 +80,22 @@ def view_cart(request):
 
 @login_required
 def add_to_cart(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
-    track_order, created = TrackOrders.objects.get_or_create(user=request.user, product_id=product_id)
-    # Logic to handle quantities can be added here, for now we're just adding the item
-    return redirect('cart')
+	track_order, created = TrackOrders.objects.get_or_create(user=request.user, product_id=product_id)
+	if not created:
+		track_order.quantity += 1
+		track_order.save()
+	return redirect('cart')
+
 
 @login_required
 def remove_from_cart(request, product_id):
-    TrackOrders.objects.filter(user=request.user, product_id=product_id).delete()
-    return redirect('cart')
+	track_order = get_object_or_404(TrackOrders, user=request.user, product_id=product_id)
+	if track_order.quantity > 1:
+		track_order.quantity -= 1
+		track_order.save()
+	else:
+		track_order.delete()
+	return redirect('cart')
 
 
 def checkout(request):

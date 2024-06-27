@@ -11,6 +11,7 @@ class Product(models.Model):
 	price = models.IntegerField()
 	desc = models.CharField(max_length=100)
 	image = models.ImageField(upload_to='images/images')
+
 	def __str__(self):
 		return f"{self.name} at ₹{self.price}"
 
@@ -18,6 +19,7 @@ class Product(models.Model):
 class TrackOrders(models.Model):
 	product_id = models.IntegerField()
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	quantity = models.PositiveIntegerField(default=1)
 
 	def __str__(self):
-		return f"For {self.user}"
+		return f"{self.quantity} x {self.product_id} for {self.user}"
