@@ -65,7 +65,13 @@
           </li>
 
           <li><a class="nav-link scrollto bg-success p-2" href="{% url "contact-us" %}">Contact</a></li>
-          <li><a class="nav-link scrollto bg-danger p-2" href="{% url "cart" %}">Cart</a></li>
+          {% if total > 0 %}
+            <li><a class="nav-link scrollto bg-danger p-2" href="{% url "cart" %}">Cart {{total}} </a></li>
+
+          {% else %}
+            <li><a class="nav-link scrollto bg-danger p-2" href="{% url "cart" %}">Cart</a></li>
+
+          {% endif %}
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

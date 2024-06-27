@@ -1,18 +1,16 @@
 {% extends "base.html" %}
 
+{% load custom_filters %}
+
 {% block title %}Home{% endblock title %}
 
 {% block main %}
 <h1>Welcome To Our Store</h1>
 {% endblock main %}
 
-
 {% block content %}
-
-<!-- ======= Portfolio Section ======= -->
 <section id="portfolio" class="portfolio">
     <div class="container">
-
         <div class="section-title">
             <h2>Products</h2>
             <h3>Check our <span>Products</span></h3>
@@ -20,31 +18,31 @@
 
         <div class="row portfolio-container">
             {% for product in products %}
-            <div class="col-lg-4 col-md-6 portfolio-item filter-app" height=300px>
-
-                <img src="media/{{product.image}}" class="img-fluid" alt="">
-
-                <div class="portfolio-info">
-                    <a href="#" id={{product.id}}><p style="color:white">{{product.name}}</p></a>
-
-                    <p>{{product.category}}</p>
-
-                    <span id="divpr{{product.id}}" class="divpr">
-                    <a href="add-item?id={{product.id}}" id="pr{{product.id}}" class="btn btn-success cart btn-sm mt-0">
-                      Add To cart
-                    </a>
-                  </span>
-
-                    <a href="media/{{product.image}}">
-                        <button class="btn btn-dark btn-sm cart">View</button>
-                    </a>
+                <div class="col-lg-4 col-md-6 portfolio-item filter-app" height="300px">
+                    <img src="media/{{ product.image }}" class="img-fluid" alt="">
+                    <div class="portfolio-info">
+                        <a href="#" id="{{ product.id }}">
+                            <p style="color:white">{{ product.name }}</p>
+                        </a>
+                        <p>{{ product.category }}</p>
+                        <div>
+                            <form method="post" action="{% url 'remove_from_cart' product.id %}" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">-</button>
+                            </form>
+                            <span>{{ cart|get_item:product.id|default:"0" }}</span>
+                            <form method="post" action="{% url 'add_to_cart' product.id %}" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-success btn-sm">+</button>
+                            </form>
+                        </div>
+                        <a href="media/{{ product.image }}">
+                            <button class="btn btn-dark btn-sm cart">View</button>
+                        </a>
+                    </div>
                 </div>
-            </div>
-
             {% endfor %}
         </div>
-
     </div>
-</section><!-- End Portfolio Section -->
-
+</section>
 {% endblock content %}
