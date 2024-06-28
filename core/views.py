@@ -9,13 +9,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 def home(request):
 	all_products = Product.objects.all()
 	cart_items = TrackOrders.objects.filter(user=request.user)
-	cart_length = TrackOrders.objects.filter(user=request.user).count()
 	cart_dict = {item.product_id: item.quantity for item in cart_items}
 
 	context = {
 		'products': all_products,
 		'cart': cart_dict,
-		'cart_length': cart_length
 	}
 	return render(request, 'index.html', context=context)
 
@@ -97,6 +95,11 @@ def remove_from_cart(request, product_id):
 		track_order.save()
 	else:
 		track_order.delete()
+	return redirect('cart')
+
+
+def clear_cart(request):
+	get_data = TrackOrders.objects.filter(user=request.user).delete()
 	return redirect('cart')
 
 

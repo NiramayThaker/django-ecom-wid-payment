@@ -65,13 +65,15 @@
           </li>
 
           <li><a class="nav-link scrollto bg-success p-2" href="{% url "contact-us" %}">Contact</a></li>
-          {% if total > 0 %}
-            <li><a class="nav-link scrollto bg-danger p-2" href="{% url "cart" %}">Cart {{total}} </a></li>
+          {% if cart_items_count %}
+            <li><a class="nav-link scrollto bg-danger p-2" href="{% url "cart" %}">Cart ({{ cart_items_count }}) </a></li>
 
           {% else %}
-            <li><a class="nav-link scrollto bg-danger p-2" href="{% url "cart" %}">Cart</a></li>
+            <li><a class="nav-link scrollto bg-danger p-2" href="{% url "cart" %}">Cart (0)</a></li>
 
-          {% endif %}
+          {% endif %}<!-- Example usage in template -->
+
+          
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -179,6 +181,12 @@
 
   <!-- Template Main JS File -->
   <script src="{% static "/assets/js/main.js" %}"></script>
+  
+  <script>
+    function confirmClearCart() {
+        return confirm("Are you sure you want to clear your cart?");
+    }
+  </script>
 
 </body>
 
