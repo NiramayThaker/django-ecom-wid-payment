@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Cart{% endblock title %}
+
+{% block main %}
+<h1>Cart</h1>
+
+{% for item in items %}
+    <h3>
+        {{ item.product.name }} - {{ item.product.category }} - ₹{{ item.product.price }}<br>
+        <form method="post" action="{% url 'remove_from_cart' item.product.id %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit">-</button>
+        </form>
+        {{ item.quantity }}
+        <form method="post" action="{% url 'add_to_cart' item.product.id %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit">+</button>
+        </form>
+    </h3>
+
+{% endfor %}
+
+<h3>Total: ₹{{ total }}</h3>
+
+<div class="d-flex justify-content-between align-items-center mt-3">
+
+
+    <form id="clear-cart-form" method="post" action="{% url 'clear_cart' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger" style="color: antiquewhite;" onclick="return confirmClearCart();">Clear Cart</button>
+    </form>
+    <a class="btn btn-success ml-3" href="{% url 'checkout' %}" style="color: antiquewhite;">Checkout</a>
+</div>
+
+<!-- <a class="btn btn-danger ml-3" href="{% url 'checkout' %}" style="color: antiquewhite;">Clear Cart</a> -->
+
+
+{% endblock main %}
