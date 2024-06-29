@@ -98,7 +98,6 @@ def remove_from_cart(request, product_id):
 	return redirect('cart')
 
 
-
 def clear_cart(request):
 	get_data = TrackOrders.objects.filter(user=request.user).delete()
 	return redirect('cart')
