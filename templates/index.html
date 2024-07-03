@@ -36,7 +36,7 @@
                                 <button type="submit" class="btn btn-success btn-sm">+</button>
                             </form>
                         </div>
-                        <a href="media/{{ product.image }}">
+                        <a href="{% url 'view_product' product.id %}">
                             <button class="btn btn-dark btn-sm cart">View</button>
                         </a>
                     </div>

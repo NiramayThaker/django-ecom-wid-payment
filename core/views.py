@@ -99,7 +99,11 @@ def remove_from_cart(request, product_id):
 
 
 def view_product(request, product_id):
-	return HttpResponse("Hello")
+	product = get_object_or_404(Product, id=product_id)
+	context = {
+		'product': product
+	}
+	return render(request, 'view_product.html', context)
 
 
 def clear_cart(request):
