@@ -78,6 +78,7 @@ def view_cart(request):
 	return render(request, 'cart.html', context=context)
 
 
+
 @login_required
 def add_to_cart(request, product_id):
 	track_order, created = TrackOrders.objects.get_or_create(user=request.user, product_id=product_id)
